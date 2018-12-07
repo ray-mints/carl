@@ -36,13 +36,20 @@ public class TraitContainer {
     return stamina;
   }
 
-  public TraitContainer add(TraitContainer that) {
+  /**
+   * Returns an instance of {@code TraitContainer} whose parameters are the result of addition of
+   * parameters of {@code this} and parameters of {@code addend}.
+   *
+   * @param addend instance of {@code TraitContainer} to add {@code this} parameters.
+   * @return new instance of {@code TraitContainer} with parameters summed.
+   */
+  public TraitContainer add(TraitContainer addend) {
     return new TraitContainer(
-        this.strength + that.strength,
-        this.intelligence + that.intelligence,
-        this.creativity + that.creativity,
-        this.patriotism + that.patriotism,
-        this.stamina + that.stamina);
+        this.strength + addend.strength,
+        this.intelligence + addend.intelligence,
+        this.creativity + addend.creativity,
+        this.patriotism + addend.patriotism,
+        this.stamina + addend.stamina);
   }
 
   @Override

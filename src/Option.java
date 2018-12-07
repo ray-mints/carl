@@ -1,12 +1,16 @@
 import java.util.Arrays;
 
-public class MatchInfo {
+/**
+ * Possible choice - profession with influences and how they match each other.
+ */
+public class Option {
 
-  private Match match;
-  private String profession;
-  private int[] influenceIndexes;
+  private final String profession;
+  private final Match match;
+  private final int[] influenceIndexes;
 
-  public MatchInfo(Match match, String profession, int ... influenceIndexes) {
+
+  public Option(String profession, Match match, int ... influenceIndexes) {
     this.match = match;
     this.profession = profession;
     this.influenceIndexes = influenceIndexes;
@@ -24,9 +28,13 @@ public class MatchInfo {
     return influenceIndexes;
   }
 
+  public String getProfession() {
+    return profession;
+  }
+
   @Override
   public String toString() {
-    return "вариант{" +
+    return "{" +
          match.toString() +
         ", профессия='" + profession + '\'' +
         ", влияния=" + Arrays.toString(influenceIndexes) +

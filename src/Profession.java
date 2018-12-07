@@ -12,6 +12,7 @@ public class Profession extends TraitContainer {
     return name;
   }
 
+  //todo: get rid of match and return light bulbs
   public Match matchIndex(TraitContainer container) {
     Match match = new Match();
 
