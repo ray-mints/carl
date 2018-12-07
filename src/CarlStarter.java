@@ -5,6 +5,12 @@ import java.util.regex.Pattern;
 
 public class CarlStarter {
 
+  private static int loadingPercents;
+
+  private static void printLoadingMessage() {
+    System.out.println("Loading.............." + loadingPercents + "%");
+  }
+
   /**
    * Gives all possible options to create Carl.
    *
@@ -14,9 +20,15 @@ public class CarlStarter {
    */
   private static List<Option> bestMatcher(Profession[] professions, List<TraitContainer> influences) {
 
+    loadingPercents = 0;
+
     List<Option> optionList = new ArrayList<>();
 
     for (Profession profession : professions) {
+
+      printLoadingMessage();
+      loadingPercents += 100 / (professions.length + 1);
+
       for (int i = 0; i < influences.size(); i++) {
         optionList.add(new Option(profession.getName(),
             profession.matchIndex(influences.get(i)),
@@ -59,6 +71,7 @@ public class CarlStarter {
 
   //todo: update - operate on lamps lighted instead for full and partial
   private static void removeTooSmallResults(List<Option> resultList, int maxFull, int maxPartial) {
+
     boolean removedSome = false;
 
     for (int i = 0; i < resultList.size(); i++) {
@@ -87,6 +100,22 @@ public class CarlStarter {
    */
   private static boolean isUnsignedInteger(String toCheck) {
     return toCheck != null && Pattern.matches("\\d+", toCheck);
+  }
+
+
+  private static List<Option> process(Profession[] professions, List<TraitContainer> influences) {
+    List<Option> resultList = bestMatcher(professions, influences);
+
+
+    loadingPercents = loadingPercents + ((100 - loadingPercents) / 2);
+    printLoadingMessage();
+
+    removeTooSmallResults(resultList);
+
+    loadingPercents = 100;
+    printLoadingMessage();
+
+    return resultList;
   }
 
 
@@ -148,9 +177,8 @@ public class CarlStarter {
           influences.remove(Integer.parseInt(choice1.substring(2)));
         }
         if (choice1.equals("p") || choice1.equals("р")) {
-          List<Option> resultList = bestMatcher(professions, influences);
 
-          removeTooSmallResults(resultList);
+          List<Option> resultList = process(professions, influences);
 
           for (int i = 0; i < resultList.size(); i++) {
             System.out.println("вариант " + i + " :" + resultList.get(i));
