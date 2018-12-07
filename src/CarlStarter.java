@@ -161,7 +161,7 @@ public class CarlStarter {
 
         if (!influences.isEmpty()) {
           System.out.println();
-          System.out.println("Добавленные влияния: ");
+          System.out.println("Доступные влияния: ");
           for (int i = 0; i < influences.size(); i++) {
             System.out.println(i + ": " + influences.get(i));
           }
@@ -171,23 +171,29 @@ public class CarlStarter {
 
         String choice1Descr;
         if (influences.isEmpty()) {
-          choice1Descr = "Сделайте выбор (a - добавить !!!ВЛИЯНИЕ, q - закончить работу):";
+          choice1Descr = "Сделайте выбор \n\ta - добавить !!!ВЛИЯНИЕ; \n\tq - закончить работу; \n>> ";
         } else {
-          choice1Descr = "Сделайте выбор (a - добавить !!!ВЛИЯНИЕ, " +
-              "rmX - удалить влияние X (нужно посдставить вместо X число), " +
-              "p - рассчитать результат, " +
-              "q - закончить работу):";
+          choice1Descr = "Сделайте выбор \n\ta - добавить !!!ВЛИЯНИЕ;" +
+              "\n\trmX - удалить влияние X (нужно посдставить вместо X число);" +
+              "\n\tp - рассчитать результат;" +
+              "\n\tq - закончить работу;\n>> ";
         }
         choice1 = console.readLine(choice1Descr);
         if (choice1.equals("a") || choice1.equals("а")) {
-          System.out.println("\nВведите поочередно каждую харатеристику. Если характеристики нет - нажмите Enter или введите 0.");
-          influences.add(new TraitContainer(
-              customIntParser(console.readLine("Сила: ")),
-              customIntParser(console.readLine("Интеллект: ")),
-              customIntParser(console.readLine("Творчество: ")),
-              customIntParser(console.readLine("Патриотизм: ")),
-              customIntParser(console.readLine("Выносливость: "))
-          ));
+          System.out.println("\nВведите поочередно каждую харатеристику.");
+          System.out.println("Если характеристики нет - нажмите Enter или введите 0.");
+          System.out.println("Для отмены ввода !!!ВЛИЯНИЯ напишите о своей любви к вождю.");
+          try {
+            influences.add(new TraitContainer(
+                customIntParser(console.readLine("Сила: ")),
+                customIntParser(console.readLine("Интеллект: ")),
+                customIntParser(console.readLine("Творчество: ")),
+                customIntParser(console.readLine("Патриотизм: ")),
+                customIntParser(console.readLine("Выносливость: "))
+            ));
+          } catch (NumberFormatException ignored) {
+            continue;
+          }
         }
         if (choice1.startsWith("rm")) {
           influences.remove(Integer.parseInt(choice1.substring(2)));
@@ -200,7 +206,7 @@ public class CarlStarter {
             System.out.println("вариант " + i + " :" + resultList.get(i));
           }
 
-          String choice2 = console.readLine("Сделайте выбор (число - выбрать вариант, любой другой ввод - вернутся к !!!ВЛИЯНИЯМ):");
+          String choice2 = console.readLine("Сделайте выбор: \nчисло - выбрать вариант; \nлюбой другой ввод - вернутся к !!!ВЛИЯНИЯМ)\n>> ");
           if (isUnsignedInteger(choice2)) {
             System.out.println("\nВаш выбор: ");
             Option chosenOption = resultList.get(Integer.parseInt(choice2));
@@ -215,7 +221,7 @@ public class CarlStarter {
               influences.remove(indexes[i]);
             }
 
-            System.out.println("Нажмите Enter");
+            System.out.println("Сделайте клон и нажмите Enter");
 
             console.readLine();
           }
