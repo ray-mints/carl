@@ -1,3 +1,5 @@
+package com.github.ray_mints.carl.containers;
+
 import java.util.Arrays;
 
 /**

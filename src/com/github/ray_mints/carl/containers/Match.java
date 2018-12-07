@@ -1,21 +1,23 @@
+package com.github.ray_mints.carl.containers;
+
 public class Match {
 
   private int fullMatches;
   private int partialMatches;
 
-  public void incrementFullMatches(){
+  void incrementFullMatches(){
     fullMatches++;
   }
 
-  public void incrementPartialMatches() {
+  void incrementPartialMatches() {
     partialMatches++;
   }
 
-  public int getFullMatches() {
+  int getFullMatches() {
     return fullMatches;
   }
 
-  public int getPartialMatches() {
+  int getPartialMatches() {
     return partialMatches;
   }
 

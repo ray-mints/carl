@@ -1,3 +1,5 @@
+package com.github.ray_mints.carl.containers;
+
 public class Profession extends TraitContainer {
 
   private final String name;
@@ -13,15 +15,15 @@ public class Profession extends TraitContainer {
   }
 
   //todo: get rid of match and return light bulbs
-  public Match matchIndex(TraitContainer container) {
+  public Match matchInfluences(TraitContainer influences) {
     Match match = new Match();
 
     int [] deviations = new int[5];
-    deviations[0] = Math.abs(getStrength() - container.getStrength());
-    deviations[1] = Math.abs(getIntelligence() - container.getIntelligence());
-    deviations[2] = Math.abs(getCreativity() - container.getCreativity());
-    deviations[3] = Math.abs(getPatriotism() - container.getPatriotism());
-    deviations[4] = Math.abs(getStamina() - container.getStamina());
+    deviations[0] = Math.abs(getStrength() - influences.getStrength());
+    deviations[1] = Math.abs(getIntelligence() - influences.getIntelligence());
+    deviations[2] = Math.abs(getCreativity() - influences.getCreativity());
+    deviations[3] = Math.abs(getPatriotism() - influences.getPatriotism());
+    deviations[4] = Math.abs(getStamina() - influences.getStamina());
 
     for (int deviation : deviations) {
       if(deviation == 0) {

@@ -1,3 +1,9 @@
+package com.github.ray_mints.carl;
+
+import com.github.ray_mints.carl.containers.Option;
+import com.github.ray_mints.carl.containers.Profession;
+import com.github.ray_mints.carl.containers.TraitContainer;
+
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,28 +36,28 @@ public class CarlStarter {
 
       for (int i = 0; i < influences.size(); i++) {
         optionList.add(new Option(profession.getName(),
-            profession.matchIndex(influences.get(i)),
+            profession.matchInfluences(influences.get(i)),
             i));
 
         for (int j = i + 1; j < influences.size(); j++) {
           optionList.add(new Option(profession.getName(),
-              profession.matchIndex(influences.get(i).add(influences.get(j))),
+              profession.matchInfluences(influences.get(i).add(influences.get(j))),
               i, j));
 
           for (int k = j + 1; k < influences.size(); k++) {
             optionList.add(new Option(profession.getName(),
-                profession.matchIndex(influences.get(i).add(influences.get(j)).add(influences.get(k))),
+                profession.matchInfluences(influences.get(i).add(influences.get(j)).add(influences.get(k))),
                 i, j, k));
 
 
             for (int l = k + 1; l < influences.size(); l++) {
               optionList.add(new Option(profession.getName(),
-                  profession.matchIndex(influences.get(i).add(influences.get(j)).add(influences.get(k)).add(influences.get(l))),
+                  profession.matchInfluences(influences.get(i).add(influences.get(j)).add(influences.get(k)).add(influences.get(l))),
                   i, j, k, l));
 
               for (int m = l + 1; m < influences.size(); m++) {
                 optionList.add(new Option(profession.getName(),
-                    profession.matchIndex(influences.get(i).add(influences.get(j)).add(influences.get(k)).add(influences.get(l)).add(influences.get(m))),
+                    profession.matchInfluences(influences.get(i).add(influences.get(j)).add(influences.get(k)).add(influences.get(l)).add(influences.get(m))),
                     i, j, k, l, m));
 
               }
@@ -155,8 +161,8 @@ public class CarlStarter {
     professions[4] = new Profession("Учитель биологии", 10, 25, 10, 15, 15);
 
     List<TraitContainer> influences = new ArrayList<>();
-//    influences.add(new TraitContainer(15, 15, 0, -10, 10);
-//    influences.add(new TraitContainer(20, 0, 20, 5, -10));
+//    influences.add(new com.github.ray_mints.carl.containers.TraitContainer(15, 15, 0, -10, 10);
+//    influences.add(new com.github.ray_mints.carl.containers.TraitContainer(20, 0, 20, 5, -10));
 
     String inputChoice0 = "";
 

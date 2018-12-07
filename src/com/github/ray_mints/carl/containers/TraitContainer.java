@@ -1,3 +1,5 @@
+package com.github.ray_mints.carl.containers;
+
 public class TraitContainer {
 
 
@@ -16,32 +18,32 @@ public class TraitContainer {
     this.stamina = stamina;
   }
 
-  public int getStrength() {
+  int getStrength() {
     return strength;
   }
 
-  public int getIntelligence() {
+  int getIntelligence() {
     return intelligence;
   }
 
-  public int getCreativity() {
+  int getCreativity() {
     return creativity;
   }
 
-  public int getPatriotism() {
+  int getPatriotism() {
     return patriotism;
   }
 
-  public int getStamina() {
+  int getStamina() {
     return stamina;
   }
 
   /**
-   * Returns an instance of {@code TraitContainer} whose parameters are the result of addition of
+   * Returns an instance of {@code com.github.ray_mints.carl.containers.TraitContainer} whose parameters are the result of addition of
    * parameters of {@code this} and parameters of {@code addend}.
    *
-   * @param addend instance of {@code TraitContainer} to add {@code this} parameters.
-   * @return new instance of {@code TraitContainer} with parameters summed.
+   * @param addend instance of {@code com.github.ray_mints.carl.containers.TraitContainer} to add {@code this} parameters.
+   * @return new instance of {@code com.github.ray_mints.carl.containers.TraitContainer} with parameters summed.
    */
   public TraitContainer add(TraitContainer addend) {
     return new TraitContainer(
