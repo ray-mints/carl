@@ -21,8 +21,6 @@ public class CarlStarter {
    */
   private static List<Option> bestMatcher(Profession[] professions, List<TraitContainer> influences) {
 
-    loadingPercents = 0;
-
     List<Option> optionList = new ArrayList<>();
 
     for (Profession profession : professions) {
@@ -77,7 +75,7 @@ public class CarlStarter {
    * @param toParse - String to parse to int
    * @return int value from String.
    */
-  public static int customIntParser(String toParse) {
+  private static int customIntParser(String toParse) {
     if (toParse.trim().equals("")) {
       return 0;
     }
@@ -120,6 +118,8 @@ public class CarlStarter {
 
 
   private static List<Option> process(Profession[] professions, List<TraitContainer> influences) {
+    loadingPercents = 0;
+
     List<Option> resultList = bestMatcher(professions, influences);
 
 
@@ -134,7 +134,7 @@ public class CarlStarter {
     return resultList;
   }
 
-  public static String inputWithChoices(String... choices) {
+  private static String inputWithChoices(String... choices) {
     System.out.println("Сделайте выбор: ");
     for (String choice : choices) {
       System.out.println("\t" + choice + ";");
@@ -158,10 +158,10 @@ public class CarlStarter {
 //    influences.add(new TraitContainer(15, 15, 0, -10, 10);
 //    influences.add(new TraitContainer(20, 0, 20, 5, -10));
 
-    String choice1 = "";
+    String inputChoice0 = "";
 
 
-    while (!choice1.equals("q")) {
+    while (!inputChoice0.equals("q")) {
 
       if (console == null) {
         System.out.print("Ошибка!. Консоль недоступна.");
@@ -179,15 +179,15 @@ public class CarlStarter {
 
 
         if (influences.isEmpty()) {
-          choice1 = inputWithChoices("a - добавить !!!ВЛИЯНИЕ", "q - закончить работу");
+          inputChoice0 = inputWithChoices("a - добавить !!!ВЛИЯНИЕ", "q - закончить работу");
         } else {
-          choice1 = inputWithChoices(
+          inputChoice0 = inputWithChoices(
               "a - добавить !!!ВЛИЯНИЕ",
-              "rmX - удалить влияние X (нужно посдставить вместо X число)",
+              "rmX - удалить !!!ВЛИЯНИЕ X (нужно посдставить вместо X число)",
               "p - рассчитать результат",
               "q - закончить работу");
         }
-        if (choice1.equals("a") || choice1.equals("а")) {
+        if (inputChoice0.equals("a") || inputChoice0.equals("а")) {
           System.out.println("\nВведите поочередно каждую харатеристику.");
           System.out.println("Если характеристики нет - нажмите Enter или введите 0.");
           System.out.println("Для отмены ввода !!!ВЛИЯНИЯ напишите о своей любви к вождю.");
@@ -203,10 +203,10 @@ public class CarlStarter {
             continue;
           }
         }
-        if (choice1.startsWith("rm")) {
-          influences.remove(Integer.parseInt(choice1.substring(2)));
+        if (inputChoice0.startsWith("rm")) {
+          influences.remove(Integer.parseInt(inputChoice0.substring(2)));
         }
-        if (choice1.equals("p") || choice1.equals("р")) {
+        if (inputChoice0.equals("p") || inputChoice0.equals("р")) {
 
           List<Option> resultList = process(professions, influences);
 
@@ -214,10 +214,18 @@ public class CarlStarter {
             System.out.println("вариант " + i + " :" + resultList.get(i));
           }
 
-          String choice2 = inputWithChoices("число - выбрать вариант", "любой другой ввод - вернутся к !!!ВЛИЯНИЯМ");
-          if (isUnsignedInteger(choice2)) {
+          String inputChoice1 = inputWithChoices("доступное число - выбрать вариант", "любой другой ввод - вернутся к !!!ВЛИЯНИЯМ");
+          if (isUnsignedInteger(inputChoice1)) {
+            int chosenOptionIndex = Integer.parseInt(inputChoice1);
+
+            if(chosenOptionIndex >= resultList.size()) {
+              continue;
+            }
+
+            Option chosenOption = resultList.get(chosenOptionIndex);
+
+
             System.out.println("\nВаш выбор: ");
-            Option chosenOption = resultList.get(Integer.parseInt(choice2));
             System.out.println("Профессия: " + chosenOption.getProfession());
             System.out.println("!!!ВЛИЯНИЯ:");
             int[] indexes = chosenOption.getInfluenceIndexes();
