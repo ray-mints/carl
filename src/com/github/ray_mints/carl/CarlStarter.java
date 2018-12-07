@@ -193,6 +193,7 @@ public class CarlStarter {
               "a - добавить одно !!!ВЛИЯНИЕ",
               "aX - добавить несколько !!!ВЛИЯНИЙ (нужно посдставить вместо X число)",
               "rmX - удалить !!!ВЛИЯНИЕ X (нужно посдставить вместо X число)",
+              "c - удалить все !!!ВЛИЯНИЯ",
               "p - рассчитать результат",
               "q - закончить работу");
         }
@@ -228,6 +229,10 @@ public class CarlStarter {
         if (inputChoice0.startsWith("rm")) {
           influences.remove(Integer.parseInt(inputChoice0.substring(2)));
         }
+        if(inputChoice0.equals("c") || inputChoice0.equals("с")) {
+          influences.clear();
+        }
+
         if (inputChoice0.equals("p") || inputChoice0.equals("р")) {
 
           List<Option> resultList = process(professions, influences);
