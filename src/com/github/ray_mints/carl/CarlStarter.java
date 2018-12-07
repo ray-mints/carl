@@ -185,28 +185,44 @@ public class CarlStarter {
 
 
         if (influences.isEmpty()) {
-          inputChoice0 = inputWithChoices("a - добавить !!!ВЛИЯНИЕ", "q - закончить работу");
+          inputChoice0 = inputWithChoices("a - добавить одно !!!ВЛИЯНИЕ",
+              "aX - добавить несколько !!!ВЛИЯНИЙ (нужно посдставить вместо X число)",
+              "q - закончить работу");
         } else {
           inputChoice0 = inputWithChoices(
-              "a - добавить !!!ВЛИЯНИЕ",
+              "a - добавить одно !!!ВЛИЯНИЕ",
+              "aX - добавить несколько !!!ВЛИЯНИЙ (нужно посдставить вместо X число)",
               "rmX - удалить !!!ВЛИЯНИЕ X (нужно посдставить вместо X число)",
               "p - рассчитать результат",
               "q - закончить работу");
         }
-        if (inputChoice0.equals("a") || inputChoice0.equals("а")) {
-          System.out.println("\nВведите поочередно каждую харатеристику.");
-          System.out.println("Если характеристики нет - нажмите Enter или введите 0.");
-          System.out.println("Для отмены ввода !!!ВЛИЯНИЯ напишите о своей любви к вождю.");
-          try {
-            influences.add(new TraitContainer(
-                customIntParser(console.readLine("Сила: ")),
-                customIntParser(console.readLine("Интеллект: ")),
-                customIntParser(console.readLine("Творчество: ")),
-                customIntParser(console.readLine("Патриотизм: ")),
-                customIntParser(console.readLine("Выносливость: "))
-            ));
-          } catch (NumberFormatException ignored) {
-            continue;
+        if (inputChoice0.startsWith("a") || inputChoice0.startsWith("а")) {
+          int timesToRepeat = 1;
+
+          if (inputChoice0.length() > 1) {
+            String x = inputChoice0.substring(1);
+            if (isUnsignedInteger(x)) {
+              timesToRepeat = Integer.parseInt(x);
+            } else {
+              continue;
+            }
+          }
+
+          for (int i = 0; i < timesToRepeat; i++) {
+            System.out.println("\nВведите поочередно каждую харатеристику.");
+            System.out.println("Если характеристики нет - нажмите Enter или введите 0.");
+            System.out.println("Для отмены ввода !!!ВЛИЯНИЯ напишите о своей любви к вождю.");
+            try {
+              influences.add(new TraitContainer(
+                  customIntParser(console.readLine("Сила: ")),
+                  customIntParser(console.readLine("Интеллект: ")),
+                  customIntParser(console.readLine("Творчество: ")),
+                  customIntParser(console.readLine("Патриотизм: ")),
+                  customIntParser(console.readLine("Выносливость: "))
+              ));
+            } catch (NumberFormatException ignored) {
+              break;
+            }
           }
         }
         if (inputChoice0.startsWith("rm")) {
@@ -224,7 +240,7 @@ public class CarlStarter {
           if (isUnsignedInteger(inputChoice1)) {
             int chosenOptionIndex = Integer.parseInt(inputChoice1);
 
-            if(chosenOptionIndex >= resultList.size()) {
+            if (chosenOptionIndex >= resultList.size()) {
               continue;
             }
 
