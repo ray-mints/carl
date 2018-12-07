@@ -69,6 +69,21 @@ public class CarlStarter {
     removeTooSmallResults(resultList, 0, 0);
   }
 
+
+  /**
+   * Integer.parseInt, except if trimmed string is empty - result is 0;
+   *
+   * @param toParse - String to parse to int
+   * @return int value from String.
+   */
+  public static int customIntParser(String toParse) {
+    if(toParse.trim().equals("")) {
+      return 0;
+    }
+    return Integer.parseInt(toParse);
+
+  }
+
   //todo: update - operate on lamps lighted instead for full and partial
   private static void removeTooSmallResults(List<Option> resultList, int maxFull, int maxPartial) {
 
@@ -165,12 +180,13 @@ public class CarlStarter {
         }
         choice1 = console.readLine(choice1Descr);
         if (choice1.equals("a") || choice1.equals("а")) {
+          System.out.println("\nВведите поочередно каждую харатеристику. Если характеристики нет - нажмите Enter или введите 0.");
           influences.add(new TraitContainer(
-              Integer.parseInt(console.readLine("Сила: ")),
-              Integer.parseInt(console.readLine("Интеллект: ")),
-              Integer.parseInt(console.readLine("Творчество: ")),
-              Integer.parseInt(console.readLine("Патриотизм: ")),
-              Integer.parseInt(console.readLine("Выносливость: "))
+              customIntParser(console.readLine("Сила: ")),
+              customIntParser(console.readLine("Интеллект: ")),
+              customIntParser(console.readLine("Творчество: ")),
+              customIntParser(console.readLine("Патриотизм: ")),
+              customIntParser(console.readLine("Выносливость: "))
           ));
         }
         if (choice1.startsWith("rm")) {
