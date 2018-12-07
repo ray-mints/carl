@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class CarlStarter {
 
   private static int loadingPercents;
+  private static Console console = System.console();
 
   private static void printLoadingMessage() {
     System.out.println("Loading.............." + loadingPercents + "%");
@@ -77,7 +78,7 @@ public class CarlStarter {
    * @return int value from String.
    */
   public static int customIntParser(String toParse) {
-    if(toParse.trim().equals("")) {
+    if (toParse.trim().equals("")) {
       return 0;
     }
     return Integer.parseInt(toParse);
@@ -133,6 +134,15 @@ public class CarlStarter {
     return resultList;
   }
 
+  public static String inputWithChoices(String... choices) {
+    System.out.println("Сделайте выбор: ");
+    for (String choice : choices) {
+      System.out.println("\t" + choice + ";");
+    }
+
+    return console.readLine(">> ");
+  }
+
 
   public static void main(String[] args) {
 
@@ -149,7 +159,6 @@ public class CarlStarter {
 //    influences.add(new TraitContainer(20, 0, 20, 5, -10));
 
     String choice1 = "";
-    Console console = System.console();
 
 
     while (!choice1.equals("q")) {
@@ -161,7 +170,7 @@ public class CarlStarter {
 
         if (!influences.isEmpty()) {
           System.out.println();
-          System.out.println("Доступные влияния: ");
+          System.out.println("Доступные !!!ВЛИЯНИЯ: ");
           for (int i = 0; i < influences.size(); i++) {
             System.out.println(i + ": " + influences.get(i));
           }
@@ -169,16 +178,15 @@ public class CarlStarter {
         }
 
 
-        String choice1Descr;
         if (influences.isEmpty()) {
-          choice1Descr = "Сделайте выбор \n\ta - добавить !!!ВЛИЯНИЕ; \n\tq - закончить работу; \n>> ";
+          choice1 = inputWithChoices("a - добавить !!!ВЛИЯНИЕ", "q - закончить работу");
         } else {
-          choice1Descr = "Сделайте выбор \n\ta - добавить !!!ВЛИЯНИЕ;" +
-              "\n\trmX - удалить влияние X (нужно посдставить вместо X число);" +
-              "\n\tp - рассчитать результат;" +
-              "\n\tq - закончить работу;\n>> ";
+          choice1 = inputWithChoices(
+              "a - добавить !!!ВЛИЯНИЕ",
+              "rmX - удалить влияние X (нужно посдставить вместо X число)",
+              "p - рассчитать результат",
+              "q - закончить работу");
         }
-        choice1 = console.readLine(choice1Descr);
         if (choice1.equals("a") || choice1.equals("а")) {
           System.out.println("\nВведите поочередно каждую харатеристику.");
           System.out.println("Если характеристики нет - нажмите Enter или введите 0.");
@@ -206,7 +214,7 @@ public class CarlStarter {
             System.out.println("вариант " + i + " :" + resultList.get(i));
           }
 
-          String choice2 = console.readLine("Сделайте выбор: \nчисло - выбрать вариант; \nлюбой другой ввод - вернутся к !!!ВЛИЯНИЯМ)\n>> ");
+          String choice2 = inputWithChoices("число - выбрать вариант", "любой другой ввод - вернутся к !!!ВЛИЯНИЯМ");
           if (isUnsignedInteger(choice2)) {
             System.out.println("\nВаш выбор: ");
             Option chosenOption = resultList.get(Integer.parseInt(choice2));
