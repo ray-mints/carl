@@ -64,9 +64,7 @@ public class CarlStarter {
     for (int i = 0; i < resultList.size(); i++) {
       int currentFull = resultList.get(i).getFullMatches();
       int currentPartial = resultList.get(i).getPartialMatches();
-      if ((currentFull == maxFull && currentPartial < maxPartial) ||
-          (currentFull < maxFull && currentPartial == maxPartial) ||
-          (currentFull < maxFull && currentPartial < maxPartial)) {
+      if (currentFull < maxFull && currentPartial < maxPartial) {
         removedSome = true;
         resultList.remove(i);
         i--;
